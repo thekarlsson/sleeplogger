@@ -3,5 +3,5 @@ require 'mongoid'
 class Sleep
   include Mongoid::Document
   field :name, type: String
-  field :time, type: String
+  field :datetime, type: DateTime
 end

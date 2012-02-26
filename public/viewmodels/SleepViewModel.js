@@ -11,6 +11,10 @@ var SleepViewModel = function() {
 	self.updateTimes = function(data) {
 		self.times([]);
 		$.map($.parseJSON(data), function(item) {
+			var itemDatetime = new Date(item['datetime']);
+			item['date'] = itemDatetime.toLocaleDateString();
+			item['time'] = itemDatetime.toLocaleTimeString();
+			delete item['datetime'];
 			self.times.push(item);
 		});
 	}

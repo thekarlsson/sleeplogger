@@ -1,0 +1,44 @@
+<!doctype html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Sleeplogger</title>
+  <meta name="description" content="Push the button!">
+  <meta name="author" content="The Party Party">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+      <h1>Sleeplogger</h1>
+    </header>
+    <div id="main" role="main">
+      <p>Welcome stranger! This name is not yet claimed, should you want it.
+      </p>
+      <button data-bind="click: layClaim">Lay claim</button>
+    </div>
+
+    <footer>
+      
+    </footer>
+  </div> <!--! end of #container -->
+
+  <span id="credits">A Party Party Creation</span>
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Import Knockout -->
+  <script type='text/javascript' src='../libs/knockout-2.0.0.js'></script>
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+
+  <!-- Import view-models -->
+  <script type='text/javascript' src='../viewmodels/ClaimViewModel.js'></script>
+  
+  <!-- end scripts-->
+
+</body>
+</html>
