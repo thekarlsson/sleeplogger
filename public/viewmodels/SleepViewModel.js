@@ -2,7 +2,6 @@ var SleepViewModel = function() {
 	var self = this;
 	
 	// Observables
-	self.confirmation = ko.observable("");
 	self.times = ko.observableArray([]);
 	
 	
@@ -11,9 +10,9 @@ var SleepViewModel = function() {
 	self.updateTimes = function(data) {
 		self.times([]);
 		$.map($.parseJSON(data), function(item) {
-			var itemDatetime = new Date(item['datetime']);
-			item['date'] = itemDatetime.toLocaleDateString();
-			item['time'] = itemDatetime.toLocaleTimeString();
+			var itemDatetime = new XDate(item['datetime']);
+			item['date'] = itemDatetime.toString('yyyy-MM-dd');
+			item['time'] = itemDatetime.toString('HH:mm');
 			delete item['datetime'];
 			self.times.push(item);
 		});
