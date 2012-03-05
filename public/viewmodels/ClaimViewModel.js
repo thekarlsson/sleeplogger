@@ -16,18 +16,3 @@ var ClaimViewModel = function() {
 
 // Activate
 ko.applyBindings(new SleepViewModel());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

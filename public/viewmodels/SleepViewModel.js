@@ -4,6 +4,8 @@ var SleepViewModel = function() {
 	// Observables
 	self.times = ko.observableArray([]);
 	
+	// Other variables
+	var maxNumberOfTimes = 10 //default value
 	
 	// Operations
 	
@@ -19,7 +21,7 @@ var SleepViewModel = function() {
 	}
 	
 	self.getInit = function() {
-		$.get(window.location.pathname + '/times', function(data) {
+		$.get(window.location.pathname + '/times' + '/' + maxNumberOfTimes, function(data) {
 		self.updateTimes(data);
 		});
 	}
@@ -31,24 +33,23 @@ var SleepViewModel = function() {
 			});
 	}
 	
+	self.moreTimes = function() {
+		if (maxNumberOfTimes < 20){
+			maxNumberOfTimes += 5
+			self.getInit()
+		}
+	}
+	
+	self.lessTimes = function() {
+		if (maxNumberOfTimes > 5) {
+			maxNumberOfTimes -= 5
+			self.getInit()
+		}
+	}
+	
 	// Load initial values from server
 	self.getInit()
 }
 
 // Activate
 ko.applyBindings(new SleepViewModel());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
