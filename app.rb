@@ -12,13 +12,17 @@ Mongoid.configure do |config|
   config.persist_in_safe_mode = false
 end
 
+def return_sleeps(username, amount)
+  res.write ActiveSupport::JSON.encode(sleeps = Sleep.desc(:datetime).all_of(name: username.capitalize).limit(amount))
+end
+
 Cuba.define do
   on get do
 		on "sleep" do
-			on ":user_name" do |user_name|
+			on ":username" do |username|
 				on "times" do
 					on ":number_of_times_to_return" do |number_of|
-						res.write ActiveSupport::JSON.encode(sleeps = Sleep.desc(:datetime).all_of(name: user_name.capitalize).limit(number_of.to_i))
+					  return_sleeps(username.capitalize, number_of.to_i)
 					end
 				end
 				res.write File.read(File.join('public', 'app.html'))
@@ -32,10 +36,10 @@ Cuba.define do
   
   on post do
 		on "sleep" do
-			on ":user_name" do |user_name|
-				on "sleepnow" do
-          sleep = Sleep.new(name: user_name.capitalize, datetime: DateTime.now).save
-					res.write ActiveSupport::JSON.encode(sleeps = Sleep.desc(:datetime).all_of(name: user_name.capitalize).limit(10))
+			on ":username" do |username|
+				on "sleepnow", param('numberOfTimes') do |number_of|
+          sleep = Sleep.new(name: username.capitalize, datetime: DateTime.now).save
+          return_sleeps(username.capitalize, number_of.to_i)
 				end
 			end
 		end

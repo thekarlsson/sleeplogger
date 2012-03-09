@@ -7,6 +7,7 @@ var SleepViewModel = function() {
     // Other variables
     var maxNumberOfTimes = 20,
         minNumberOfTimes = 5,
+		stdNumberOfTimes = 15,
         incrDecrBy = 5;
     
     // Operations
@@ -28,14 +29,14 @@ var SleepViewModel = function() {
     }
     
     self.sleepNow = function() {
-        $.post(window.location.pathname + '/sleepnow', {"data": ko.toJSON("Jag are en Irlandsk cowboy!")},
+        $.post(window.location.pathname + '/sleepnow', {"data": ko.toJSON("Jag are en Irlandsk cowboy!"), "numberOfTimes": self.times().length},
             function(data){
                 self.updateTimes(data);
             });
     }
 
 	self.isDecrementable = function () {
-		if (self.times().length > minNumberOfTimes + incrDecrBy) {
+		if (self.times().length >= minNumberOfTimes + incrDecrBy) {
 			return true;
 		}
 		else {
@@ -44,7 +45,7 @@ var SleepViewModel = function() {
 	};
 	
 	self.isIncrementable = function() {
-		if (self.times().length < maxNumberOfTimes - incrDecrBy) {
+		if (self.times().length <= maxNumberOfTimes - incrDecrBy) {
 			return true;
 		}
 		else {
@@ -65,7 +66,7 @@ var SleepViewModel = function() {
     }
     
     // Load initial values from server
-    self.getTimes()
+    self.getTimes(stdNumberOfTimes)
 }
 
 // Activate
