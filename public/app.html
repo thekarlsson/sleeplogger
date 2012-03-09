@@ -29,8 +29,8 @@
           </tr>
         </tbody>
       </table>
-			<button data-bind="click: moreTimes">More</button>
-			<button data-bind="click: lessTimes">Less</button>
+			<button data-bind="click: moreTimes, enable: isIncrementable() ">More</button>
+			<button data-bind="click: lessTimes, enable: isDecrementable()">Less</button>
 			<div>
 				<button data-bind="click: sleepNow">Sleep Now</button>
 			</div>
